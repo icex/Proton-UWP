@@ -1,6 +1,6 @@
 [submodule "wine"]
 	path = wine
-	url = https://github.com/xodus-gaming/wine.git
+	url = https://github.com/icex/wine.git
 [submodule "dxvk"]
 	path = dxvk
 	url = https://github.com/doitsujin/dxvk.git
@@ -18,7 +18,7 @@
 	url = https://github.com/GStreamer/orc.git
 [submodule "vkd3d-proton"]
 	path = vkd3d-proton
-	url = https://github.com/HansKristian-Work/vkd3d-proton
+	url = https://github.com/icex/vkd3d-proton.git
 [submodule "OpenXR-SDK"]
 	path = OpenXR-SDK
 	url = https://github.com/KhronosGroup/OpenXR-SDK
