@@ -158,6 +158,20 @@ function configure() {
 
   stat "Using $arg_container_engine."
 
+  # The pinned x86_64 SDK lacks xkbregistry headers for Wine's native Wayland
+  # driver. Build an extension of that same SDK for local and hosted builds.
+  # An explicitly supplied SDK remains the caller's responsibility; Wine's
+  # --with-wayland check below refuses an incomplete SDK rather than omitting
+  # the driver from an apparently successful runtime build.
+  if [[ -z "$arg_protonsdk_image" && "$target_arch" = x86_64 ]]; then
+    local sdk_dir="$srcdir/contrib/ferestre"
+    local sdk_hash
+    sdk_hash=$(sha256sum "$sdk_dir/Dockerfile.sdk" | cut -c1-16)
+    arg_protonsdk_image="ferestre-proton-sdk:$sdk_hash"
+    cmd "$arg_container_engine" build --build-arg "BASE_IMAGE=$steamrt_image" \
+        -f "$sdk_dir/Dockerfile.sdk" -t "$arg_protonsdk_image" "$sdk_dir"
+  fi
+
   ## Write out config
   # Don't die after this point or we'll have rather unhelpfully deleted the Makefile
   [[ ! -e "$MAKEFILE" ]] || rm "$MAKEFILE"
