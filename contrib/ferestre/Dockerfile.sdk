@@ -4,7 +4,8 @@ FROM ${BASE_IMAGE}
 # SteamRT has Wayland and xkbcommon development files, but omits xkbregistry.
 # Wine otherwise silently disables its Wayland driver. Match the SDK's version
 # and install both Unix architectures used by Proton's x86_64 build.
+# Weston supplies an isolated output for the built runtime's display-API tests.
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
-       libxkbregistry-dev:amd64=1.7.0-2 libxkbregistry-dev:i386=1.7.0-2 \
+       libxkbregistry-dev:amd64=1.7.0-2 libxkbregistry-dev:i386=1.7.0-2 weston \
     && rm -rf /var/lib/apt/lists/*
