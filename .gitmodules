@@ -57,8 +57,7 @@
 	url = https://github.com/KhronosGroup/glslang
 [submodule "piper"]
 	path = piper
-	url = https://github.com/shaunren/piper.git
-	branch = library
+	url = https://github.com/icex/piper.git
 [submodule "openfst"]
 	path = openfst
 	url = https://github.com/alphacep/openfst

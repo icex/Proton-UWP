@@ -496,6 +496,10 @@ $(OBJ)/.piper-x86_64-post-build:
 	mv $(PIPER_x86_64_DST)/*.so* $(PIPER_x86_64_DST)/lib/$(x86_64-unix_TARGET)
 	mkdir -p $(DST_DIR)/share
 	cp -a $(PIPER_x86_64_DST)/{espeak-ng-data,libtashkeel_model.ort} $(DST_DIR)/share/
+	if [ -d "$(PIPER_x86_64_DST)/share/licenses/onnxruntime" ]; then \
+	    mkdir -p "$(DST_DIR)/share/licenses" && \
+	    cp -a "$(PIPER_x86_64_DST)/share/licenses/onnxruntime" "$(DST_DIR)/share/licenses/"; \
+	fi
 	touch $@
 
 $(OBJ)/.piper-aarch64-post-build:
@@ -504,6 +508,10 @@ $(OBJ)/.piper-aarch64-post-build:
 ifeq ($(findstring x86_64,$(unix_ARCHS)),)
 	mkdir -p $(DST_DIR)/share
 	cp -a $(PIPER_aarch64_DST)/{espeak-ng-data,libtashkeel_model.ort} $(DST_DIR)/share/
+	if [ -d "$(PIPER_aarch64_DST)/share/licenses/onnxruntime" ]; then \
+	    mkdir -p "$(DST_DIR)/share/licenses" && \
+	    cp -a "$(PIPER_aarch64_DST)/share/licenses/onnxruntime" "$(DST_DIR)/share/licenses/"; \
+	fi
 endif
 	touch $@
 
